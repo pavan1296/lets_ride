@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "host": "localhost:8080",
+    "basePath": "/auth_user/",
+    "info": {
+        "version": "1.0.0",
+        "title": "Lets Ride",
+        "description": "API"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "oauth": {
+            "tokenUrl": "http://auth.ibtspl.com/oauth2/",
+            "flow": "password",
+            "scopes": {
+                "read": "read users",
+                "write": "create users",
+                "update": "update users",
+                "delete": "delete users",
+                "superuser": "super user permission"
+            },
+            "type": "oauth2"
+        }
+    },
+    "definitions": {
+      "UserLoginDetails": {
+        "type": "object",
+        "properties": {
+          "phone_number": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        },
+        "required" : [
+          "phone_number",
+          "password"
+          ]
+      }
+    },
+    "parameters": {},
+    "responses": {
+      "AccessToken": {
+        "description": "success_response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+              }
+          }
+      },
+    "UserProfile": {
+      "description": "user profile response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "MALE",
+              "FEMALE"
+              ]
+          },
+          "image_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "phone_number",
+          "gender"
+          ]
+      }
+    }
+    },
+    "paths": {
+      "/user/login/v1/": {
+        "post": {
+          "operationId": "user_login",
+          "summary": "User Login Authentication",
+          "description": "User Login Authentication",
+          "parameters": [
+            {
+            "name": "credentials",
+            "in": "body",
+            "description": "user credentials",
+            "schema": {
+              "$ref": "#/definitions/UserLoginDetails"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "$ref": "#/responses/AccessToken"
+            },
+            "404": {
+              "description": "Invalid_User"
+            }
+          }
+        }
+      },
+    "/user/user_profile/v1/": {
+      "get": {
+        "security": [
+          {
+            "oauth": [
+              "superuser"
+            ]
+          }
+        ],
+        "operationId": "user_profile",
+        "summary": "Get User Profile",
+        "description": "get user profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserProfile"
+          }
+        }
+      }
+    }
+}
+}
