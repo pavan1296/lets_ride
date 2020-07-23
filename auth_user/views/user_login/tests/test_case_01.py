@@ -6,7 +6,7 @@ from auth_user.interactors.user_login_interactor import UserLoginInteractor
 from django_swagger_utils.utils.test import CustomAPITestCase
 from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 from auth_user.factory import UserFactory
-from auth_user.constants.dtos import UserLoginAccessTokenDTOFactoy
+from auth_user.tests.factories.dto_factory import UserLoginAccessTokenDTOFactoy
 from common.oauth_user_auth_tokens_service import OAuthUserAuthTokensService
 from auth_user.models import User
 

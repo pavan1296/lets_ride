@@ -4,7 +4,7 @@ from django_swagger_utils.drf_server.exceptions import NotFound, BadRequest
 from auth_user.interactors.presenters.presenter_interface import PresenterInterface
 from auth_user.interactors.storages.storage_interface import StorageInterface
 from auth_user.interactors.user_profile_interactor import UserProfileInteractor
-from auth_user.constants.dtos import UserProfileFactory
+from auth_user.tests.factories.dto_factory import UserProfileFactory
 from auth_user.constants.exception_messeges import USER_DOES_NOT_EXISTS
 from auth_user.exceptions.exceptions import UserDoesNotExist
 

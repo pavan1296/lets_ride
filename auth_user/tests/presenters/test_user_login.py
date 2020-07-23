@@ -3,7 +3,7 @@ import json
 from auth_user.constants.exception_messeges import INVALID_PHONE_NUMBER, USER_DOES_NOT_EXISTS
 from django_swagger_utils.drf_server.exceptions import NotFound, Forbidden
 from auth_user.presenters.presenter_implementation import PresenterImplementation
-from auth_user.constants.dtos import UserLoginAccessTokenDTOFactoy
+from auth_user.tests.factories.dto_factory import UserLoginAccessTokenDTOFactoy
 
 def test_user_login_details_returns_access_token(user_access_token_response_fixture):
     #Arrange

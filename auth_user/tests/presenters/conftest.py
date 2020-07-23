@@ -1,5 +1,5 @@
 import pytest
-from auth_user.constants.dtos import UserProfileFactory
+from auth_user.tests.factories.dto_factory import UserProfileFactory
 
 @pytest.fixture()
 def user_access_token_response_fixture():

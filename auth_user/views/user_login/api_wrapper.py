@@ -23,7 +23,6 @@ def api_wrapper(*args, **kwargs):
         presenter=presenter,
         oauth2_storage=oauth2_storage
     )
-
     response_data = interactor.login_validation(
         phone_number=phone_number, password=password
     )

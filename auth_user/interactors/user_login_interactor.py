@@ -21,7 +21,6 @@ class UserLoginInteractor:
         #TODO: check phone number and password exists in user
         try:
             access_token = self._check_user_credentials(phone_number=phone_number, password=password)
-            print(access_token)
             return self.presenter.user_access_token(access_token=access_token)
         except InvalidPhonenumber:
             self.presenter.raise_exception_for_invalid_phone_number()

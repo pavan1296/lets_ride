@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import create_autospec, patch
 from auth_user.interfaces.service_interface import ServiceInterface
-from auth_user.constants.dtos import UserProfileFactory
+from auth_user.tests.factories.dto_factory import UserProfileFactory
 from auth_user.interactors.user_profile_interactor import UserProfileInteractor
 
 @patch.object(UserProfileInteractor, 'get_user_dtos')

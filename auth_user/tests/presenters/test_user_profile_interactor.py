@@ -2,7 +2,7 @@ import pytest
 import json
 from django_swagger_utils.drf_server.exceptions import NotFound, Forbidden
 from auth_user.constants.exception_messeges import USER_DOES_NOT_EXISTS
-from auth_user.constants.dtos import UserProfileFactory
+from auth_user.tests.factories.dto_factory import UserProfileFactory
 from auth_user.presenters.presenter_implementation import PresenterImplementation
 
 

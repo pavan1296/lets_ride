@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
-    "host": "localhost:8080",
-    "basePath": "/auth_user/",
+    "host": "localhost",
+    "basePath": "/api/auth_user/",
     "info": {
         "version": "1.0.0",
         "title": "Lets Ride",
@@ -120,7 +120,7 @@
             "200": {
               "$ref": "#/responses/AccessToken"
             },
-            "404": {
+            "400": {
               "description": "Invalid_User"
             }
           }
