@@ -1,4 +1,8 @@
-__all__ = []
+from lets_ride.models.ride_request import RideRequest
+
+__all__ = [
+    "RideRequest"
+]
 
 # class DummyModel(AbstractDateTimeModel):
 #     """

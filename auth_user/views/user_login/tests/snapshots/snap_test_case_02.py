@@ -7,12 +7,12 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase02UserLoginAPITestCase::test_case status'] = 404
+snapshots['TestCase02UserLoginAPITestCase::test_case status'] = 200
 
 snapshots['TestCase02UserLoginAPITestCase::test_case body'] = {
-    'http_status_code': 404,
     'res_status': 'INVALID_PHONE_NUMBER',
-    'response': 'You are giving invalid phone number or password please check again'
+    'response': 'You are giving invalid phone number or password please check again',
+    'status': 400
 }
 
 snapshots['TestCase02UserLoginAPITestCase::test_case header_params'] = {
@@ -21,7 +21,7 @@ snapshots['TestCase02UserLoginAPITestCase::test_case header_params'] = {
         'en'
     ],
     'content-length': [
-        '145',
+        '135',
         'Content-Length'
     ],
     'content-type': [
@@ -39,7 +39,7 @@ snapshots['TestCase02UserLoginAPITestCase::test_case header_params'] = {
 }
 
 snapshots['TestCase02UserLoginAPITestCase::test_case access_token'] = {
-    'http_status_code': 404,
     'res_status': 'INVALID_PHONE_NUMBER',
-    'response': 'You are giving invalid phone number or password please check again'
+    'response': 'You are giving invalid phone number or password please check again',
+    'status': 400
 }

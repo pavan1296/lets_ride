@@ -23,9 +23,9 @@ class UserLoginInteractor:
             access_token = self._check_user_credentials(phone_number=phone_number, password=password)
             return self.presenter.user_access_token(access_token=access_token)
         except InvalidPhonenumber:
-            self.presenter.raise_exception_for_invalid_phone_number()
+            return self.presenter.raise_exception_for_invalid_phone_number()
         except UserDoesNotExist:
-            self.presenter.raise_exception_for_user_does_not_exist()
+            return self.presenter.raise_exception_for_user_does_not_exist()
 
 
     def _check_user_credentials(self, phone_number: str, password: str):

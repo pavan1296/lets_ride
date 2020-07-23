@@ -14,10 +14,9 @@ class UserProfileInteractor:
         #TODO: check user_ids exists in user model
         try:
             user_profile_dto = self._check_user_id_exists_in_user(user_ids=user_ids)
-            print(user_profile_dto)
             return self.presenter.user_profile_dto_response(user_profile_dto=user_profile_dto)
         except UserDoesNotExist:
-            return self.presenter.raise_exception_for_invalid_user_id()
+            return self.presenter.raise_exception_for_user_does_not_exist()
 
     def _check_user_id_exists_in_user(self, user_ids: List[int]):
         self._check_list_of_user_ids_present_in_user(user_ids=user_ids)

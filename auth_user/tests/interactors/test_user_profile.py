@@ -25,7 +25,7 @@ def test_user_profile_with_valid_data_return_response():
     #Assert
     presenter.user_profile_dto_response.assert_called_once_with(user_profile_dto=user_profile_factory)
 
-def test_user_profile_with_invalid_user_raises_exception():
+def test_user_profile_with_invalid_user_raises_exception(user_does_not_exist_fixture):
     #Arrange
     # Arrange
     user_ids = [1]
@@ -35,13 +35,10 @@ def test_user_profile_with_invalid_user_raises_exception():
         storage=storage,
         presenter=presenter
     )
-    err_message = USER_DOES_NOT_EXISTS[0]
-    res_status = USER_DOES_NOT_EXISTS[1]
-    storage.check_user_id_exists_in_user_model.side_effect = UserDoesNotExist
-    presenter.raise_exception_for_invalid_user_id.side_effect = NotFound
+    expected_output = user_does_not_exist_fixture
+    presenter.raise_exception_for_user_does_not_exist.return_value = user_does_not_exist_fixture
     #Act
-    with pytest.raises(NotFound) as err:
-        interactor.get_user_profile(user_ids=user_ids)
+    actual_output = interactor.get_user_profile(user_ids=user_ids)
     #Assert
-    storage.check_user_id_exists_in_user_model.assert_called_once_with(user_ids=user_ids)
-    presenter.raise_exception_for_invalid_user_id.assert_called_once()
+    presenter.raise_exception_for_user_does_not_exist.assert_called_once()
+    assert actual_output == expected_output

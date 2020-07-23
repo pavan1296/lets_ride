@@ -9,10 +9,11 @@ from django_swagger_utils.drf_server.exceptions import NotFound, Unauthorized
 from auth_user.exceptions.exceptions import InvalidPhonenumber, UserDoesNotExist
 
 
-def test_user_login_with_invalid_phone_number():
+def test_user_login_with_invalid_phone_number(invalid_phone_number_fixture):
     #Arrange
     phone_number = "1874563210"
     password = "qwerty"
+    expected_output = invalid_phone_number_fixture
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     oauth2_storage = create_autospec(OAuthUserAuthTokensService)
@@ -22,12 +23,14 @@ def test_user_login_with_invalid_phone_number():
         presenter = presenter,
         oauth2_storage=oauth2_storage
     )
-    presenter.raise_exception_for_invalid_phone_number.side_effect = NotFound
+    presenter.raise_exception_for_invalid_phone_number.return_value = invalid_phone_number_fixture
     #Act
-    with pytest.raises(NotFound):
-        interactor.login_validation(phone_number=phone_number, password=password)
+    actual_output = interactor.login_validation(phone_number=phone_number, password=password)
+    #Assert
+    presenter.raise_exception_for_invalid_phone_number.assert_called_once()
+    assert actual_output == expected_output
 
-def test_user_login_details_with_invalid_phone_number_with_chars_raises_exception():
+def test_user_login_details_with_invalid_phone_number_with_chars_raises_exception(invalid_phone_number_fixture):
     #Arrange
     phone_number = "874563210i"
     password = "qwerty"
@@ -40,13 +43,15 @@ def test_user_login_details_with_invalid_phone_number_with_chars_raises_exceptio
         presenter=presenter,
         oauth2_storage=oauth2_storage
     )
-    presenter.raise_exception_for_invalid_phone_number.side_effect = NotFound
+    expected_output = invalid_phone_number_fixture
+    presenter.raise_exception_for_invalid_phone_number.return_value = invalid_phone_number_fixture
     # Act
-    with pytest.raises(NotFound):
-        interactor.login_validation(phone_number=phone_number, password=password)
+    actual_output = interactor.login_validation(phone_number=phone_number, password=password)
+    #Assert
+    presenter.raise_exception_for_invalid_phone_number.assert_called_once()
+    assert actual_output == expected_output
 
-
-def test_user_login_details_with_phone_number_greater_than_ten_chars_raises_exception():
+def test_user_login_details_with_phone_number_greater_than_ten_chars_raises_exception(invalid_phone_number_fixture):
     phone_number = "87456321077"
     password = "qwerty"
     storage = create_autospec(StorageInterface)
@@ -58,12 +63,15 @@ def test_user_login_details_with_phone_number_greater_than_ten_chars_raises_exce
         presenter=presenter,
         oauth2_storage=oauth2_storage
     )
-    presenter.raise_exception_for_invalid_phone_number.side_effect = NotFound
+    expected_output = invalid_phone_number_fixture
+    presenter.raise_exception_for_invalid_phone_number.return_value = invalid_phone_number_fixture
     # Act
-    with pytest.raises(NotFound):
-        interactor.login_validation(phone_number=phone_number, password=password)
+    actual_output = interactor.login_validation(phone_number=phone_number, password=password)
+    #Assert
+    presenter.raise_exception_for_invalid_phone_number.assert_called_once()
+    assert actual_output == expected_output
 
-def test_user_login_details_with_phone_number_less_than_ten_chars_raises_exception():
+def test_user_login_details_with_phone_number_less_than_ten_chars_raises_exception(invalid_phone_number_fixture):
     phone_number = "87456321077"
     password = "qwerty"
     storage = create_autospec(StorageInterface)
@@ -75,10 +83,34 @@ def test_user_login_details_with_phone_number_less_than_ten_chars_raises_excepti
         presenter=presenter,
         oauth2_storage=oauth2_storage
     )
-    presenter.raise_exception_for_invalid_phone_number.side_effect = NotFound
+    expected_output = invalid_phone_number_fixture
+    presenter.raise_exception_for_invalid_phone_number.return_value = invalid_phone_number_fixture
     # Act
-    with pytest.raises(NotFound):
-        interactor.login_validation(phone_number=phone_number, password=password)
+    actual_output = interactor.login_validation(phone_number=phone_number, password=password)
+    #Assert
+    presenter.raise_exception_for_invalid_phone_number.assert_called_once()
+    assert actual_output == expected_output
+
+def test_user_login_details_with_invalid_password_given_return_response(user_does_not_exist_fixture):
+    phone_number = "7799888142"
+    password = "qwerty"
+    storage = create_autospec(StorageInterface)
+    presenter = create_autospec(PresenterInterface)
+    oauth2_storage = create_autospec(OAuthUserAuthTokensService)
+    token_service = create_autospec(OAuthUserAuthTokensService)
+    interactor = UserLoginInteractor(
+        storage=storage,
+        presenter=presenter,
+        oauth2_storage=oauth2_storage
+    )
+    expected_output = user_does_not_exist_fixture
+    storage.check_phone_number_and_password_exists_in_user.side_effect = UserDoesNotExist
+    presenter.raise_exception_for_user_does_not_exist.return_value = user_does_not_exist_fixture
+    # Act
+    actual_output = interactor.login_validation(phone_number=phone_number, password=password)
+    #Assert
+    presenter.raise_exception_for_user_does_not_exist.assert_called_once()
+    assert actual_output == expected_output
 
 @patch.object(OAuthUserAuthTokensService, 'create_user_auth_tokens')
 def test_user_login_details_return_access_token(access_token_mock, get_access_token_dto_fixture, user_access_token_dto_fixture):

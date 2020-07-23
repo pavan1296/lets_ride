@@ -19,3 +19,7 @@ class PresenterInterface(ABC):
     @abstractmethod
     def raise_exception_for_invalid_date_time_given(self):
         pass
+
+    @abstractmethod
+    def post_ride_request_response(self):
+        pass

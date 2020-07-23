@@ -21,7 +21,3 @@ class PresenterInterface:
     @abc.abstractmethod
     def user_profile_dto_response(self, user_profile_dto: List[UserProfileDTO]):
         pass
-
-    @abc.abstractmethod
-    def raise_exception_for_invalid_user_id(self):
-        pass

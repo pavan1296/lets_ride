@@ -98,6 +98,23 @@
           "gender"
           ]
       }
+    },
+    "InvalidUser": {
+      "description": "authentication unsuccessfull",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer"
+          },
+          "res_status": {
+            "type": "string"
+          }
+        }
+      }
     }
     },
     "paths": {
@@ -121,7 +138,7 @@
               "$ref": "#/responses/AccessToken"
             },
             "400": {
-              "description": "Invalid_User"
+              "$ref": "#/responses/InvalidUser"
             }
           }
         }
@@ -142,6 +159,9 @@
         "responses": {
           "200": {
             "$ref": "#/responses/UserProfile"
+          },
+          "403": {
+            "$ref": "#/responses/InvalidUser"
           }
         }
       }

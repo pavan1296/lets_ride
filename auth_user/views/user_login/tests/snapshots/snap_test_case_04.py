@@ -7,12 +7,12 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase04UserLoginAPITestCase::test_case status'] = 404
+snapshots['TestCase04UserLoginAPITestCase::test_case status'] = 200
 
 snapshots['TestCase04UserLoginAPITestCase::test_case body'] = {
-    'http_status_code': 404,
     'res_status': 'USER_DOES_NOT_EXISTS',
-    'response': 'You are not registered with us, please register'
+    'response': 'You are not registered with us, please register',
+    'status': 400
 }
 
 snapshots['TestCase04UserLoginAPITestCase::test_case header_params'] = {
@@ -21,7 +21,7 @@ snapshots['TestCase04UserLoginAPITestCase::test_case header_params'] = {
         'en'
     ],
     'content-length': [
-        '126',
+        '116',
         'Content-Length'
     ],
     'content-type': [
@@ -39,7 +39,7 @@ snapshots['TestCase04UserLoginAPITestCase::test_case header_params'] = {
 }
 
 snapshots['TestCase04UserLoginAPITestCase::test_case access_token'] = {
-    'http_status_code': 404,
     'res_status': 'USER_DOES_NOT_EXISTS',
-    'response': 'You are not registered with us, please register'
+    'response': 'You are not registered with us, please register',
+    'status': 400
 }

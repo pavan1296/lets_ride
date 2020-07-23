@@ -15,14 +15,11 @@ def test_user_profile_with_valid_details_returns_user_profile(user_profile_fixtu
     #Assert
     assert response == user_profile_fixture
 
-def test_user_profile_with_invalid_user_id_given():
+def test_user_profile_with_invalid_user_id_given(user_does_not_exist_fixture):
     #Arrange
     presenter = PresenterImplementation()
-    err_message = USER_DOES_NOT_EXISTS[0]
-    res_status = USER_DOES_NOT_EXISTS[1]
     #Act
-    with pytest.raises(NotFound) as err:
-        presenter.raise_exception_for_user_does_not_exist()
+    actual_output = presenter.raise_exception_for_user_does_not_exist()
+    response = json.loads(actual_output.content)
     #Asserrt
-    assert err.value.message == err_message
-    assert err.value.res_status == res_status
+    assert response == user_does_not_exist_fixture

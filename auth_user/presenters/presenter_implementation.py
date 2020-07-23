@@ -3,7 +3,6 @@ from typing import List
 from auth_user.interactors.presenters.presenter_interface import PresenterInterface
 from auth_user.constants.dtos import UserLoginAccessTokenDTO
 from django.http import HttpResponse
-from django_swagger_utils.drf_server.exceptions import NotFound, Forbidden
 from auth_user.constants.exception_messeges import INVALID_PHONE_NUMBER, USER_DOES_NOT_EXISTS
 from auth_user.constants.dtos import UserProfileDTO
 
@@ -18,10 +17,22 @@ class PresenterImplementation(PresenterInterface):
         return HttpResponse(response)
 
     def raise_exception_for_invalid_phone_number(self):
-        raise NotFound(*INVALID_PHONE_NUMBER)
+        invalid_phone_number_response = {
+            "response": INVALID_PHONE_NUMBER[0],
+            "status": 400,
+            "res_status": INVALID_PHONE_NUMBER[1]
+        }
+        response = json.dumps(invalid_phone_number_response)
+        return HttpResponse(response)
 
     def raise_exception_for_user_does_not_exist(self):
-        raise NotFound(*USER_DOES_NOT_EXISTS)
+        invalid_user = {
+            "response": USER_DOES_NOT_EXISTS[0],
+            "status": 400,
+            "res_status": USER_DOES_NOT_EXISTS[1]
+        }
+        response = json.dumps(invalid_user)
+        return HttpResponse(response)
 
     def user_profile_dto_response(self, user_profile_dto: List[UserProfileDTO]):
         list_of_user_profiles = []
