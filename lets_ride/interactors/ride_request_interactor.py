@@ -38,5 +38,7 @@ class RideRequestInteractor(RideORAssetRequestValidationMixin):
         is_invalid_luggage_quantity = ride_request_dto.luggage_quantity <= 0
         if is_invalid_luggage_quantity:
             raise InvalidLuggageQuantity
+        print("wfwef")
         self.validate_form_request(request_dto=ride_request_dto)
+        print("QWERT")
         self.storage.post_ride_request_details(ride_request_dto=ride_request_dto)

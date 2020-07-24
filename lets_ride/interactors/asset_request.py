@@ -33,9 +33,7 @@ class AssetRequestInteractor(RideORAssetRequestValidationMixin):
             return self.presenter.return_error_response_for_invalid_asset_type_given()
 
     def _check_asset_request(self, asset_request_dto: AssetRequestDTO):
-        print("$"*100)
         self._check_validations_for_asset_dto(asset_request_dto=asset_request_dto)
-        print("^"*100)
         self.storage.post_asset_request(asset_request_dto=asset_request_dto)
 
     def _check_validations_for_asset_dto(self, asset_request_dto: AssetRequestDTO):

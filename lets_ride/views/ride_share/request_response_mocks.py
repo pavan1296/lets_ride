@@ -8,8 +8,8 @@ REQUEST_BODY_JSON = """
     "flexible_from_time": "2099-12-31 00:00:00",
     "flexible_to_time": "2099-12-31 00:00:00",
     "travel_date_time": "2099-12-31 00:00:00",
-    "no_of_seats": 1,
-    "luggage_quantity": 1
+    "no_of_seats_available": 1,
+    "assets_quantity": 1
 }
 """
 
