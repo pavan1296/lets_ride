@@ -34,7 +34,6 @@ class UserLoginInteractor:
         user_id = self._validate_phone_number_with_password(phone_number=phone_number, password=password)
         from common.oauth_user_auth_tokens_service import \
             OAuthUserAuthTokensService
-        print(user_id)
         oauth = OAuthUserAuthTokensService(
             oauth2_storage=self.oauth2_storage
         )
@@ -48,9 +47,11 @@ class UserLoginInteractor:
 
     def _validate_phone_number(self, phone_number: str):
         is_invalid_phone_number = not re.match(r'^([6-9])',phone_number)
+        print(is_invalid_phone_number)
         if is_invalid_phone_number:
             raise InvalidPhonenumber
         is_invalid_phone_number = len(phone_number) > 10 or len(phone_number) < 10
+        print(is_invalid_phone_number)
         if is_invalid_phone_number:
             raise InvalidPhonenumber
         is_invalid_phone_number = any(number.isalpha() for number in phone_number)

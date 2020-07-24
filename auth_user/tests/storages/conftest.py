@@ -1,5 +1,4 @@
 import pytest
-from auth_user.models.user import User
 from auth_user.factory import UserFactory
 
 

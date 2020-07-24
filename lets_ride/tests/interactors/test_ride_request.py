@@ -1,12 +1,9 @@
-import pytest
 import datetime
 from unittest.mock import create_autospec, patch
 from lets_ride.interactors.ride_request_interactor import RideRequestInteractor
 from lets_ride.interactors.storages.storage_interface import StorageInterface
 from lets_ride.interactors.presenters.presenter_interface import PresenterInterface
-from lets_ride.exceptions.exceptions import InvalidNoOfSeats, InvalidLuggageQuantity, InvalidPlaceGiven, \
-    InvalidDateTimeGiven
-from lets_ride.tests.dtos.dtos import RideRequestDTOFactory
+from lets_ride.tests.factories.dto_factory import RideRequestDTOFactory
 
 
 def test_ride_request_for_gievn_no_of_seats_invalid_raises_exception(invalid_no_of_seats_fixture):
@@ -58,11 +55,11 @@ def test_ride_request_when_invalid_from_place_given(invalid_from_or_to_place_fix
     expected_output = invalid_from_or_to_place_fixture
     ride_request_dto = RideRequestDTOFactory()
     ride_request_dto.from_place = ""
-    presenter.raise_exception_for_invalid_place_gievn.return_value = invalid_from_or_to_place_fixture
+    presenter.raise_exception_for_invalid_place_given.return_value = invalid_from_or_to_place_fixture
     # Act
     actual_output = interactor.post_ride_details_from_user(ride_request_dto=ride_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_place_gievn.assert_called_once()
+    presenter.raise_exception_for_invalid_place_given.assert_called_once()
     assert actual_output == expected_output
 
 
@@ -77,11 +74,11 @@ def test_ride_request_when_invalid_to_place_given(invalid_from_or_to_place_fixtu
     expected_output = invalid_from_or_to_place_fixture
     ride_request_dto = RideRequestDTOFactory()
     ride_request_dto.to_place = ""
-    presenter.raise_exception_for_invalid_place_gievn.return_value = invalid_from_or_to_place_fixture
+    presenter.raise_exception_for_invalid_place_given.return_value = invalid_from_or_to_place_fixture
     # Act
     actual_output = interactor.post_ride_details_from_user(ride_request_dto=ride_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_place_gievn.assert_called_once()
+    presenter.raise_exception_for_invalid_place_given.assert_called_once()
     assert actual_output == expected_output
 
 

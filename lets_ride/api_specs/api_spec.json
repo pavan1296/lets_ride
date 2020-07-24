@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "host": "localhost:8080",
-    "basePath": "/lets_ride/",
+    "basePath": "/api/lets_ride/",
     "info": {
         "version": "1.0.0",
         "title": "Lets Ride",
@@ -69,11 +69,8 @@
           "from_place",
           "to_place",
           "is_flexible",
-          "flexible_from_time",
-          "flexible_to_time",
           "no_of_seats",
-          "luggage_quantity",
-          "travel_date_time"
+          "luggage_quantity"
           ]
       },
       "UserAssetRequest": {
@@ -96,6 +93,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "flexible_to_time": {
+            "type": "string",
+            "format": "date-time"
+          },
           "no_of_assets": {
             "type": "integer",
             "format": "int32"
@@ -106,7 +107,7 @@
           "asset_sensitivity": {
             "type": "string",
             "enum": [
-              "HIGH_SENSITIVITY",
+              "HIGH_SENSITIVE",
               "SENSITIVE",
               "NORMAL"
               ]
@@ -118,9 +119,7 @@
         "required": [
           "from_place",
           "to_place",
-          "travel_date_time",
           "is_flexible",
-          "flexible_from_time",
           "no_of_assets",
           "asset_type",
           "asset_sensitivity",

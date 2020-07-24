@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django_swagger_utils.drf_server.utils.decorator.interface_decorator \
     import validate_decorator
 from .validator_class import ValidatorClass
@@ -13,6 +14,11 @@ def api_wrapper(*args, **kwargs):
     user = kwargs['user']
     request_data = dict(kwargs['request_data'])
     user_id = user.id
+    if request_data['is_flexible']:
+        request_data['flexible_from_time'] = request_data['flexible_from_time'] + timedelta(hours=5, minutes=30)
+        request_data['flexible_to_time'] = request_data['flexible_to_time'] + timedelta(hours=5, minutes=30)
+    else:
+        request_data['travel_date_time'] = request_data['travel_date_time'] + timedelta(hours=5, minutes=30)
 
     ride_request_dto = RideRequestDTO(
         from_place=request_data['from_place'],
@@ -22,7 +28,8 @@ def api_wrapper(*args, **kwargs):
         flexible_to_time=request_data['flexible_to_time'],
         no_of_seats=request_data['no_of_seats'],
         luggage_quantity=request_data['luggage_quantity'],
-        travel_date_time=request_data['travel_date_time']
+        travel_date_time=request_data['travel_date_time'],
+        user_id=user_id
     )
 
     storage = StorageImplementation()

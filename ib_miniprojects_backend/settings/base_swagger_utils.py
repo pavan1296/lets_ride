@@ -62,8 +62,8 @@ SWAGGER_UTILS = {
         }
     },
     "APPS": {
-        "auth_user": {},
-        "lets_ride": {}
+        "auth_user": {"dsu_version": "1.0"},
+        "lets_ride": {"dsu_version": "1.0"}
     },
     "HOST": os.environ.get('APIGATEWAY_ENDPOINT', '127.0.0.1:8000'),
 }

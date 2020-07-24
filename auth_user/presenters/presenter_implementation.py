@@ -23,7 +23,7 @@ class PresenterImplementation(PresenterInterface):
             "res_status": INVALID_PHONE_NUMBER[1]
         }
         response = json.dumps(invalid_phone_number_response)
-        return HttpResponse(response)
+        return HttpResponse(response, status=400)
 
     def raise_exception_for_user_does_not_exist(self):
         invalid_user = {
@@ -32,7 +32,7 @@ class PresenterImplementation(PresenterInterface):
             "res_status": USER_DOES_NOT_EXISTS[1]
         }
         response = json.dumps(invalid_user)
-        return HttpResponse(response)
+        return HttpResponse(response, status=400)
 
     def user_profile_dto_response(self, user_profile_dto: List[UserProfileDTO]):
         list_of_user_profiles = []

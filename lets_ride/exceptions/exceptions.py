@@ -9,3 +9,12 @@ class InvalidPlaceGiven(Exception):
 
 class InvalidDateTimeGiven(Exception):
     pass
+
+class InvalidNoOfAssets(Exception):
+    pass
+
+class InvalidDeliveryAddress(Exception):
+    pass
+
+class InvalidAssetType(Exception):
+    pass

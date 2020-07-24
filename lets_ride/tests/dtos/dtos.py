@@ -1,10 +1,5 @@
 from dataclasses import dataclass
-import factory
-from factory import Factory
-import datetime
-import string
-import factory.fuzzy
-
+import enum
 
 @dataclass
 class RideRequestDTO:
@@ -18,15 +13,15 @@ class RideRequestDTO:
     date_time: int
 
 
-class RideRequestDTOFactory(Factory):
-    class Meta:
-        model = RideRequestDTO
-
-    from_place = factory.Iterator(['Hyderabad', 'Bangaluru'])
-    to_place = factory.Iterator(['Chennai', 'Mumbai'])
-    is_flexible = True
-    flexible_from_time = factory.LazyFunction(datetime.datetime.now)
-    flexible_to_time = factory.LazyFunction(datetime.datetime.now)
-    no_of_seats = factory.Sequence(lambda n: n + 1)
-    luggage_quantity = factory.Sequence(lambda n: n + 1)
-    date_time = factory.LazyFunction(datetime.datetime.now)
+@dataclass
+class AssetRequestDTO:
+    from_place: str
+    to_place: str
+    is_flexible: bool
+    flexible_from_time: str
+    flexible_to_time: str
+    date_time: int
+    no_of_assets: int
+    asset_type: str
+    asset_sensitivity: enum
+    whom_to_deliver: str

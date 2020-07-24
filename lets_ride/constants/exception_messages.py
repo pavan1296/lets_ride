@@ -22,3 +22,18 @@ INVALID_FLEXIBLE_DATETIME = (
     "invalid flexible datetime gievn",
     "INVALID_FLEXIBLE_DATETIME"
 )
+
+INVALID_NO_OF_ASSETS = (
+    "invalid assets given",
+    "INVALID_NO_OF_ASSETS"
+)
+
+INVALID_WHOM_TO_DELIVER = (
+    "invalid asset delivery address",
+    "INVALID_WHOM_TO_DELIVER"
+)
+
+INVALID_ASSET_TYPE = (
+    "invalid asset type given",
+    "INVALID_ASSET_TYPE"
+)

@@ -13,7 +13,7 @@ class PresenterInterface(ABC):
         pass
 
     @abstractmethod
-    def raise_exception_for_invalid_place_gievn(self):
+    def raise_exception_for_invalid_place_given(self):
         pass
 
     @abstractmethod
@@ -22,4 +22,20 @@ class PresenterInterface(ABC):
 
     @abstractmethod
     def post_ride_request_response(self):
+        pass
+
+    @abstractmethod
+    def asset_request_response(self):
+        pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_asset_given(self):
+        pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_asset_delivery(self):
+        pass
+
+    @abstractmethod
+    def return_error_response_for_invalid_asset_type_given(self):
         pass

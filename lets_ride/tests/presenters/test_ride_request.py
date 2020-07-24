@@ -27,12 +27,12 @@ def test_raise_exception_for_invalid_luggage_quantity_given(invalid_luggage_quan
     # Assert
     assert response == expected_output
 
-def test_raise_exception_for_invalid_place_gievn(invalid_place_fixture):
+def test_raise_exception_for_invalid_place_given(invalid_place_fixture):
     # Arrange
     presenter = PresenterImplementation()
     expected_output = invalid_place_fixture
     # Act
-    actual_output = presenter.raise_exception_for_invalid_place_gievn()
+    actual_output = presenter.raise_exception_for_invalid_place_given()
     response = json.loads(actual_output.content)
     # Assert
     assert response == expected_output
