@@ -9,7 +9,6 @@ from lets_ride.tests.factories.dto_factory import AssetRequestFactory
 
 def test_asset_request_with_invalid_no_of_assets_returns_error_message(invalid_no_of_assets_fixture):
     # Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -18,17 +17,16 @@ def test_asset_request_with_invalid_no_of_assets_returns_error_message(invalid_n
     )
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.no_of_assets = 0
-    presenter.raise_exception_for_invalid_asset_given.return_value = invalid_no_of_assets_fixture
+    presenter.invalid_assets_given_return_error_response.return_value = invalid_no_of_assets_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_asset_given.assert_called_once()
+    presenter.invalid_assets_given_return_error_response.assert_called_once()
     assert actual_output == invalid_no_of_assets_fixture
 
 
 def test_asset_request_when_invalid_whom_to_deliver_raise_exception(invalid_whom_to_deliver_fixture):
     # Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -38,17 +36,16 @@ def test_asset_request_when_invalid_whom_to_deliver_raise_exception(invalid_whom
     expected_output = invalid_whom_to_deliver_fixture
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.whom_to_deliver = ''
-    presenter.raise_exception_for_invalid_asset_delivery.return_value = invalid_whom_to_deliver_fixture
+    presenter.invalid_assets_delivery_given_returns_error_response.return_value = invalid_whom_to_deliver_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_asset_delivery.assert_called_once()
+    presenter.invalid_assets_delivery_given_returns_error_response.assert_called_once()
     assert actual_output == expected_output
 
 
 def test_asset_request_invalid_from_place_gievn_returns_error_response(invalid_from_or_to_place_fixture):
     #Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -58,16 +55,15 @@ def test_asset_request_invalid_from_place_gievn_returns_error_response(invalid_f
     expected_output = invalid_from_or_to_place_fixture
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.from_place = ""
-    presenter.raise_exception_for_invalid_place_given.return_value = invalid_from_or_to_place_fixture
+    presenter.invalid_place_given_returns_error_response.return_value = invalid_from_or_to_place_fixture
     #Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     #Assert
-    presenter.raise_exception_for_invalid_place_given.assert_called_once()
+    presenter.invalid_place_given_returns_error_response.assert_called_once()
     assert actual_output == expected_output
 
 def test_asset_request_invalid_to_place_gievn_returns_error_response(invalid_from_or_to_place_fixture):
     #Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -77,17 +73,16 @@ def test_asset_request_invalid_to_place_gievn_returns_error_response(invalid_fro
     expected_output = invalid_from_or_to_place_fixture
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.to_place = ""
-    presenter.raise_exception_for_invalid_place_given.return_value = invalid_from_or_to_place_fixture
+    presenter.invalid_place_given_returns_error_response.return_value = invalid_from_or_to_place_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_place_given.assert_called_once()
+    presenter.invalid_place_given_returns_error_response.assert_called_once()
     assert actual_output == expected_output
 
 
 def test_asset_request_when_invalid_flexible_time_given(invalid_flexible_datetime_fixture):
     #Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -97,17 +92,16 @@ def test_asset_request_when_invalid_flexible_time_given(invalid_flexible_datetim
     expected_output = invalid_flexible_datetime_fixture
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.flexible_to_time = datetime.datetime(2019, 12, 1, 12, 12, 12)
-    presenter.raise_exception_for_invalid_date_time_given.return_value = invalid_flexible_datetime_fixture
+    presenter.invalid_date_time_given_returns_error_reponse.return_value = invalid_flexible_datetime_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_date_time_given.assert_called_once()
+    presenter.invalid_date_time_given_returns_error_reponse.assert_called_once()
     assert actual_output == expected_output
 
 
 def test_asset_request_when_given_date_time_is_invalid_return_error_response(invalid_flexible_datetime_fixture):
     # Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -118,17 +112,16 @@ def test_asset_request_when_given_date_time_is_invalid_return_error_response(inv
     asset_request_dto = AssetRequestFactory()
     asset_request_dto.is_flexible = False
     asset_request_dto.travel_date_time = datetime.datetime(2019, 12, 1, 12, 12, 12)
-    presenter.raise_exception_for_invalid_date_time_given.return_value = invalid_flexible_datetime_fixture
+    presenter.invalid_date_time_given_returns_error_reponse.return_value = invalid_flexible_datetime_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
-    presenter.raise_exception_for_invalid_date_time_given.assert_called_once()
+    presenter.invalid_date_time_given_returns_error_reponse.assert_called_once()
     assert actual_output == expected_output
 
 
 def test_asset_request_when_given_asset_type_is_integer_return_error_response(invalid_asset_type_fixture):
     # Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -140,7 +133,7 @@ def test_asset_request_when_given_asset_type_is_integer_return_error_response(in
     asset_request_dto.asset_type = 7
     presenter.return_error_response_for_invalid_asset_type_given.return_value = invalid_asset_type_fixture
     #Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     #Assert
     presenter.return_error_response_for_invalid_asset_type_given.assert_called_once()
     assert actual_output == expected_output
@@ -148,7 +141,6 @@ def test_asset_request_when_given_asset_type_is_integer_return_error_response(in
 
 def test_asset_request_when_gievn_asset_type_is_null_return_error_respone(invalid_asset_type_fixture):
     # Arrange
-    user_id = 1
     storage = create_autospec(StorageInterface)
     presenter = create_autospec(PresenterInterface)
     interactor = AssetRequestInteractor(
@@ -160,7 +152,7 @@ def test_asset_request_when_gievn_asset_type_is_null_return_error_respone(invali
     asset_request_dto.asset_type = ""
     presenter.return_error_response_for_invalid_asset_type_given.return_value = invalid_asset_type_fixture
     # Act
-    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto, user_id=user_id)
+    actual_output = interactor.post_asset_request(asset_request_dto=asset_request_dto)
     # Assert
     presenter.return_error_response_for_invalid_asset_type_given.assert_called_once()
     assert actual_output == expected_output

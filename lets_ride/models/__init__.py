@@ -1,9 +1,12 @@
 from lets_ride.models.ride_request import RideRequest
 from lets_ride.models.asset_request import AssetRequest
+from lets_ride.models.ride_share import RideShare
+
 
 __all__ = [
     "RideRequest",
-    "AssetRequest"
+    "AssetRequest",
+    "RideShare"
 ]
 
 # class DummyModel(AbstractDateTimeModel):

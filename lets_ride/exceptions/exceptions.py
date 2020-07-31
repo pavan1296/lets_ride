@@ -18,3 +18,6 @@ class InvalidDeliveryAddress(Exception):
 
 class InvalidAssetType(Exception):
     pass
+
+class InvalidSeats(Exception):
+    pass

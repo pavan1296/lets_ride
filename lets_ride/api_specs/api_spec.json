@@ -1,263 +1,335 @@
 {
-	"swagger": "2.0",
-	"host": "localhost:8080",
-	"basePath": "/api/lets_ride/",
-	"info": {
-		"version": "1.0.0",
-		"title": "Lets Ride",
-		"description": "API"
-	},
-	"schemes": [
-		"http",
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"securityDefinitions": {
-		"oauth": {
-			"tokenUrl": "http://auth.ibtspl.com/oauth2/",
-			"flow": "password",
-			"scopes": {
-				"read": "read users",
-				"write": "create users",
-				"update": "update users",
-				"delete": "delete users",
-				"superuser": "super user permission"
-			},
-			"type": "oauth2"
-		}
-	},
-	"definitions": {
-		"CommonKeys": {
-			"type": "object",
-			"properties": {
-				"from_place": {
-					"type": "string"
-				},
-				"to_place": {
-					"type": "string"
-				},
-				"is_flexible": {
-					"type": "boolean"
-				},
-				"flexible_from_time": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"flexible_to_time": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"travel_date_time": {
-					"type": "string",
-					"format": "date-time"
-				}
-			},
-			"required": [
-				"from_place",
-				"to_place",
-				"is_flexible"
-			]
-		},
-		"RideRequestUncommonKeys": {
-			"type": "object",
-			"properties": {
-				"no_of_seats": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"luggage_quantity": {
-					"type": "integer",
-					"format": "int32"
-				}
-			},
-			"required": [
-				"no_of_seats",
-				"luggage_quantity"
-			]
-		},
-		"AssetRequestUncommonKeys": {
-			"type": "object",
-			"properties": {
-				"no_of_assets": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"asset_type": {
-					"type": "string"
-				},
-				"asset_sensitivity": {
-					"type": "string",
-					"enum": [
-						"HIGH_SENSITIVE",
-						"SENSITIVE",
-						"NORMAL"
-					]
-				},
-				"whom_to_deliver": {
-					"type": "string"
-				}
+  "swagger": "2.0",
+  "host": "localhost:8080",
+  "basePath": "/api/lets_ride/",
+  "info": {
+    "version": "1.0.0",
+    "title": "Lets Ride",
+    "description": "API"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "oauth": {
+      "tokenUrl": "http://auth.ibtspl.com/oauth2/",
+      "flow": "password",
+      "scopes": {
+        "read": "read users",
+        "write": "create users",
+        "update": "update users",
+        "delete": "delete users",
+        "superuser": "super user permission"
+      },
+      "type": "oauth2"
+    }
+  },
+  "definitions": {
+    "CommonKeys": {
+      "type": "object",
+      "properties": {
+        "from_place": {
+          "type": "string"
+        },
+        "to_place": {
+          "type": "string"
+        },
+        "is_flexible": {
+          "type": "boolean"
+        },
+        "flexible_from_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "flexible_to_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "travel_date_time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from_place",
+        "to_place",
+        "is_flexible"
+      ]
+    },
+    "RideRequestUncommonKeys": {
+      "type": "object",
+      "properties": {
+        "no_of_seats": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "luggage_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "no_of_seats",
+        "luggage_quantity"
+      ]
+    },
+    "ShareTravelUncommonKeys": {
+      "type": "object",
+      "properties": {
+        "travel_medium": {
+          "type": "string",
+          "enum": [
+            "BUS",
+            "CAR",
+            "FLIGHT",
+            "SHIP",
+            "BIKE",
+            "TRAIN",
+            "TRUCK",
+            "HEAVY_VEHICLE"
+          ]
+        },
+        "assets_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "travel_medium",
+        "assets_quantity"
+      ]
+    },
+    "AssetRequestUncommonKeys": {
+      "type": "object",
+      "properties": {
+        "no_of_assets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asset_type": {
+          "type": "string"
+        },
+        "asset_sensitivity": {
+          "type": "string",
+          "enum": [
+            "HIGH_SENSITIVE",
+            "SENSITIVE",
+            "NORMAL"
+          ]
+        },
+        "whom_to_deliver": {
+          "type": "string"
+        }
 
-			},
-			"required": [
-				"no_of_assets",
-				"asset_type",
-				"asset_sensitivity",
-				"whom_to_deliver"
-			]
-		},
-		"RideShareUncommonKeys": {
-			"type": "object",
-			"properties": {
-				"no_of_seats_available": {
-					"type": "integer",
-					"format": "int32"
-				},
-				"assets_quantity": {
-					"type": "integer",
-					"format": "int32"
-				}
-			}
-		},
-		"UserRideRequest": {
-			"allOf": [{
-					"$ref": "#/definitions/CommonKeys"
-				},
-				{
-					"$ref": "#/definitions/RideRequestUncommonKeys"
-				}
-			]
-		},
-		"UserAssetRequest": {
-			"allOf": [{
-					"$ref": "#/definitions/CommonKeys"
-				},
-				{
-					"$ref": "#/definitions/AssetRequestUncommonKeys"
-				}
-			]
-		},
-		"RideShare": {
-			"allOf": [{
-					"$ref": "#/definitions/CommonKeys"
-				},
-				{
-					"$ref": "#/definitions/RideShareUncommonKeys"
-				}
-			]
-		}
-	},
-	"parameters": {},
-	"responses": {
-		"InvalidData": {
-			"description": "bad request",
-			"schema": {
-				"type": "object",
-				"properties": {
-					"response": {
-						"type": "string"
-					},
-					"http_status_code": {
-						"type": "integer"
-					},
-					"res_status": {
-						"type": "string",
-						"enum": [
-							"INVALID_FLEXIBLE_DATETIME"
-						]
-					}
-				}
-			}
-		}
-	},
-	"paths": {
-		"/user/ride/request/v1/": {
-			"post": {
-				"security": [{
-					"oauth": [
-						"superuser"
-					]
-				}],
-				"operationId": "ride_request",
-				"summary": "Ride Reuest",
-				"description": "ride request",
-				"parameters": [{
-					"name": "ride_request",
-					"in": "body",
-					"description": "user_ride_request",
-					"schema": {
-						"$ref": "#/definitions/UserRideRequest"
-					}
-				}],
-				"responses": {
-					"201": {
-						"description": "Success_response"
-					},
-					"400": {
-						"$ref": "#/responses/InvalidData"
-					}
-				}
-			}
-		},
-		"/user/asset/request/v1/": {
-			"post": {
-				"security": [{
-					"oauth": [
-						"superuser"
-					]
-				}],
-				"operationId": "asset_request",
-				"summary": "Asset Request",
-				"description": "asset request",
-				"parameters": [{
-					"name": "asset_request",
-					"in": "body",
-					"description": "user_asset_request",
-					"schema": {
-						"$ref": "#/definitions/UserAssetRequest"
-					}
-				}],
-				"responses": {
-					"201": {
-						"description": "success_response"
-					},
-					"400": {
-						"$ref": "#/responses/InvalidData"
-					}
-				}
-			}
-		},
-		"/user/ride/share/v1/": {
-			"post": {
-				"security": [{
-					"oauth": [
-						"superuser"
-					]
-				}],
-				"operationId": "ride_share",
-				"summary": "Ride Share",
-				"description": "ride share",
-				"parameters": [{
-					"name": "ride_share",
-					"in": "body",
-					"description": "user_ride_share",
-					"schema": {
-						"$ref": "#/definitions/RideShare"
-					}
-				}],
-				"responses": {
-					"201": {
-						"description": "success_response"
-					},
-					"400": {
-						"$ref": "#/responses/InvalidData"
-					}
-				}
-			}
-		}
-	}
+      },
+      "required": [
+        "no_of_assets",
+        "asset_type",
+        "asset_sensitivity",
+        "whom_to_deliver"
+      ]
+    },
+    "RideShareUncommonKeys": {
+      "type": "object",
+      "properties": {
+        "no_of_seats_available": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "assets_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "no_of_seats_available",
+        "assets_quantity"
+        ]
+    },
+    "UserRideRequest": {
+      "allOf": [{
+          "$ref": "#/definitions/CommonKeys"
+        },
+        {
+          "$ref": "#/definitions/RideRequestUncommonKeys"
+        }
+      ]
+    },
+    "UserAssetRequest": {
+      "allOf": [{
+          "$ref": "#/definitions/CommonKeys"
+        },
+        {
+          "$ref": "#/definitions/AssetRequestUncommonKeys"
+        }
+      ]
+    },
+    "RideShare": {
+      "allOf": [{
+          "$ref": "#/definitions/CommonKeys"
+        },
+        {
+          "$ref": "#/definitions/RideShareUncommonKeys"
+        }
+      ]
+    },
+    "UserShareTravel": {
+      "allOf": [{
+          "$ref": "#/definitions/CommonKeys"
+        },
+        {
+          "$ref": "#/definitions/ShareTravelUncommonKeys"
+        }
+      ]
+    }
+  },
+  "parameters": {},
+  "responses": {
+    "InvalidData": {
+      "description": "bad request",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer"
+          },
+          "res_status": {
+            "type": "string",
+            "enum": [
+              "INVALID_FLEXIBLE_DATETIME",
+              "INVALID_OFFSET_LENGTH",
+              "INVALID_NO_OF_SEATS",
+              "INVALID_LUGGAGE_QUANTITY",
+              "INVALID_FROM_OR_TO_PLACE",
+              "INVALID_NO_OF_ASSETS",
+              "INVALID_WHOM_TO_DELIVER",
+              "INVALID_ASSET_TYPE",
+              "INVALID_SEATS"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/user/ride/request/v1/": {
+      "post": {
+        "security": [{
+          "oauth": [
+            "superuser"
+          ]
+        }],
+        "operationId": "ride_request",
+        "summary": "Ride Reuest",
+        "description": "ride request",
+        "parameters": [{
+          "name": "ride_request",
+          "in": "body",
+          "description": "user_ride_request",
+          "schema": {
+            "$ref": "#/definitions/UserRideRequest"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Success_response"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidData"
+          }
+        }
+      }
+    },
+    "/user/asset/request/v1/": {
+      "post": {
+        "security": [{
+          "oauth": [
+            "superuser"
+          ]
+        }],
+        "operationId": "asset_request",
+        "summary": "Asset Request",
+        "description": "asset request",
+        "parameters": [{
+          "name": "asset_request",
+          "in": "body",
+          "description": "user_asset_request",
+          "schema": {
+            "$ref": "#/definitions/UserAssetRequest"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "success_response"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidData"
+          }
+        }
+      }
+    },
+    "/user/ride/share/v1/": {
+      "post": {
+        "security": [{
+          "oauth": [
+            "superuser"
+          ]
+        }],
+        "operationId": "ride_share",
+        "summary": "Ride Share",
+        "description": "ride share",
+        "parameters": [{
+          "name": "ride_share",
+          "in": "body",
+          "description": "user_ride_share",
+          "schema": {
+            "$ref": "#/definitions/RideShare"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "success_response"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidData"
+          }
+        }
+      }
+    },
+    "/user/travel/info/v1/": {
+      "post": {
+        "security": [{
+          "oauth": [
+            "superuser"
+          ]
+        }],
+        "operationId": "share_travel_info",
+        "summary": "share travel info",
+        "description": "share travel info",
+        "parameters": [{
+          "name": "share_travel_info",
+          "in": "body",
+          "description": "share_travel_info",
+          "schema": {
+            "$ref": "#/definitions/UserShareTravel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "success_response"
+          }
+        }
+      }
+    }
+  }
 }

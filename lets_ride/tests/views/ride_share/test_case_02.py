@@ -6,7 +6,7 @@ from django_swagger_utils.utils.test_utils import TestUtils
 from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 
-class TestCase01RideShareAPITestCase(TestUtils):
+class TestCase02RideShareAPITestCase(TestUtils):
     APP_NAME = APP_NAME
     OPERATION_NAME = OPERATION_NAME
     REQUEST_METHOD = REQUEST_METHOD
@@ -28,7 +28,7 @@ class TestCase01RideShareAPITestCase(TestUtils):
             'flexible_to_time': '2099-12-31 00:00:00',
             'travel_date_time': '2099-12-31 00:00:00',
             'no_of_seats_available': 1,
-            'assets_quantity': 1
+            'assets_quantity': 0
         }
         path_params = {}
         query_params = {}

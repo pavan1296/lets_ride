@@ -2,6 +2,7 @@ import datetime
 import factory
 from lets_ride.constants.enums import RideRequestStatus
 from lets_ride.models.ride_request import RideRequest
+from lets_ride.models.ride_share import RideShare
 
 
 class RideRequestFactory(factory.django.DjangoModelFactory):
@@ -18,3 +19,20 @@ class RideRequestFactory(factory.django.DjangoModelFactory):
     flexible_to_time = factory.LazyFunction(datetime.datetime.now)
     status = factory.LazyFunction(RideRequestStatus.get_list_of_values)
     user_id = 2
+
+
+class RideShareFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = RideShare
+
+    from_place = factory.Iterator(['Hyderabad', 'Delhi', 'Mumbai'])
+    to_place = factory.Iterator(['Chennai', 'Pune'])
+    travel_date_time = factory.LazyFunction(datetime.datetime.now)
+    is_flexible = True
+    flexible_from_time = factory.LazyFunction(datetime.datetime.now)
+    flexible_to_time = factory.LazyFunction(datetime.datetime.now)
+    no_of_seats_available = factory.Sequence(lambda n: n + 1)
+    assets_quantity = factory.Sequence(lambda n: n + 1)
+    status = factory.LazyFunction(RideRequestStatus.get_list_of_values)
+    user_id = 2
+    ride_requests = factory.Sequence(lambda n: n + 1)

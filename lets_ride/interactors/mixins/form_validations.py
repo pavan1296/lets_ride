@@ -1,6 +1,6 @@
 import datetime
 from lets_ride.exceptions.exceptions import (
-    InvalidNoOfSeats, InvalidLuggageQuantity, InvalidPlaceGiven, InvalidDateTimeGiven
+    InvalidPlaceGiven, InvalidDateTimeGiven
 )
 
 
@@ -15,7 +15,7 @@ class RideORAssetRequestValidationMixin:
         if request_dto.is_flexible:
             if current_date_time > request_dto.flexible_to_time:
                 raise InvalidDateTimeGiven
-            elif request_dto.flexible_to_time > request_dto.flexible_from_time:
+            elif request_dto.flexible_from_time > request_dto.flexible_to_time:
                 raise InvalidDateTimeGiven
             elif current_date_time > request_dto.flexible_from_time:
                 raise InvalidDateTimeGiven

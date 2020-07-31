@@ -63,3 +63,12 @@ def invalid_asset_type_fixture():
         "res_status": "INVALID_ASSET_TYPE"
     }
     return expected_output
+
+@pytest.fixture()
+def invalid_seats_fixture():
+    expected_output = {
+        "response": "invalid seats given please enter greater than zero",
+        "status": 400,
+        "res_status":  "INVALID_SEATS"
+    }
+    return expected_output

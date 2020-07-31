@@ -13,6 +13,7 @@ class AssetRequestInteractor(RideORAssetRequestValidationMixin):
         self.presenter = presenter
 
     def post_asset_request(self, asset_request_dto: AssetRequestDTO):
+
         # TODO: check_no_of_assets_less_than_or_equal_to_zero
         # TODO: check_whom_to_deliver_should_not_be_empty
         # TODO: check_from_and_to_place_are_not_empty
@@ -22,13 +23,13 @@ class AssetRequestInteractor(RideORAssetRequestValidationMixin):
             self._check_asset_request(asset_request_dto=asset_request_dto)
             return self.presenter.asset_request_response()
         except InvalidNoOfAssets:
-            return  self.presenter.raise_exception_for_invalid_asset_given()
+            return  self.presenter.invalid_assets_given_return_error_response()
         except InvalidDeliveryAddress:
-            return self.presenter.raise_exception_for_invalid_asset_delivery()
+            return self.presenter.invalid_assets_delivery_given_returns_error_response()
         except InvalidPlaceGiven:
-            return self.presenter.raise_exception_for_invalid_place_given()
+            return self.presenter.invalid_place_given_returns_error_response()
         except InvalidDateTimeGiven:
-            return self.presenter.raise_exception_for_invalid_date_time_given()
+            return self.presenter.invalid_date_time_given_returns_error_reponse()
         except InvalidAssetType:
             return self.presenter.return_error_response_for_invalid_asset_type_given()
 

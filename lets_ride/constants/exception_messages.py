@@ -37,3 +37,9 @@ INVALID_ASSET_TYPE = (
     "invalid asset type given",
     "INVALID_ASSET_TYPE"
 )
+
+
+INVALID_SEATS = (
+    "invalid seats given please enter greater than zero",
+    "INVALID_SEATS"
+)

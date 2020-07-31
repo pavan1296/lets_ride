@@ -16,7 +16,7 @@ def test_raise_exception_for_invalid_asset_given(invalid_assert_given_fixture):
     presenter = PresenterImplementation()
     expected_output = invalid_assert_given_fixture
     #Act
-    actual_output = presenter.raise_exception_for_invalid_asset_given()
+    actual_output = presenter.invalid_assets_given_return_error_response()
     response = json.loads(actual_output.content)
     #Assert
     assert response == expected_output
@@ -26,7 +26,7 @@ def test_raise_exception_for_invalid_asset_delivery(invalid_asset_delivery_fixtu
     presenter = PresenterImplementation()
     expected_output = invalid_asset_delivery_fixture
     # Act
-    actual_output = presenter.raise_exception_for_invalid_asset_delivery()
+    actual_output = presenter.invalid_assets_delivery_given_returns_error_response()
     response = json.loads(actual_output.content)
     #Assert
     assert response == expected_output

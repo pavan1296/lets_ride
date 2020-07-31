@@ -1,7 +1,8 @@
 from lets_ride.interactors.storages.storage_interface import StorageInterface
 from lets_ride.models.ride_request import RideRequest
 from lets_ride.models.asset_request import AssetRequest
-from lets_ride.tests.dtos.dtos import RideRequestDTO
+from lets_ride.models.ride_share import RideShare
+from lets_ride.tests.dtos.dtos import RideRequestDTO, RideShareDTO, ShareTravelInfoDTO
 from lets_ride.interactors.storages.dtos.dtos import AssetRequestDTO
 
 
@@ -36,3 +37,20 @@ class StorageImplementation(StorageInterface):
             user_id=asset_request_dto.user_id
         )
         return asset_request.id
+
+    def post_ride_share_details(self, ride_share_dto: RideShareDTO):
+        ride_share = RideShare.objects.create(
+            from_place=ride_share_dto.from_place,
+            to_place=ride_share_dto.from_place,
+            travel_date_time=ride_share_dto.travel_date_time,
+            is_flexible=ride_share_dto.is_flexible,
+            flexible_from_time=ride_share_dto.flexible_from_time,
+            flexible_to_time=ride_share_dto.flexible_to_time,
+            no_of_seats_available=ride_share_dto.no_of_seats_available,
+            assets_quantity=ride_share_dto.assets_quantity,
+            user_id=ride_share_dto.user_id
+        )
+        return ride_share.id
+
+    def post_share_travel_info(self, share_travel_dto: ShareTravelInfoDTO):
+        pass
