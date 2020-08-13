@@ -47,6 +47,21 @@
           "phone_number",
           "password"
           ]
+      },
+      "UserSignUp": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
       }
     },
     "parameters": {},
@@ -67,7 +82,7 @@
           }
       },
     "UserProfile": {
-      "description": "user profile response",
+      "description": "user_profile_response",
       "schema": {
         "type": "object",
         "properties": {
@@ -100,7 +115,7 @@
       }
     },
     "InvalidUser": {
-      "description": "authentication unsuccessfull",
+      "description": "authentication unsuccessful",
       "schema": {
         "type": "object",
         "properties": {
@@ -164,6 +179,34 @@
             "$ref": "#/responses/InvalidUser"
           }
         }
+      }
+    },
+    "/user/signup/v1/": {
+      "post": {
+        "security": [
+          {
+            "oauth": [
+            ]
+          }
+        ],
+        "operationId": "user_signup",
+        "summary": "user signup",
+        "description": "user signup",
+        "parameters": [
+          {
+            "name": "signup_details",
+            "in": "body",
+            "description": "user signup details",
+            "schema": {
+              "$ref": "#/definitions/UserSignUp"
+            }
+          }
+          ],
+          "responses": {
+            "200": {
+              "description": "success_response"
+            }
+          }
       }
     }
 }

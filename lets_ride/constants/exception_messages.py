@@ -43,3 +43,8 @@ INVALID_SEATS = (
     "invalid seats given please enter greater than zero",
     "INVALID_SEATS"
 )
+
+USER_DOES_NOT_EXISTS = (
+    "user does not exists",
+    "USER_DOES_NOT_EXISTS"
+)

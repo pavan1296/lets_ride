@@ -17,7 +17,7 @@ REQUEST_BODY = """
     "flexible_to_time": "2099-12-31 00:00:00",
     "no_of_assets": 1,
     "asset_type": "string",
-    "asset_sensitivity": "HIGH_SENSITIVITY",
+    "asset_sensitivity": "NORMAL",
     "whom_to_deliver": "string"
 }
 """

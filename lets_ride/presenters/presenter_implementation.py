@@ -107,3 +107,6 @@ class PresenterImplementation(PresenterInterface):
 
     def share_travel_info_response(self):
         return HttpResponse(status=201)
+
+    def share_ride_details_response_details(self, share_ride_details):
+        pass

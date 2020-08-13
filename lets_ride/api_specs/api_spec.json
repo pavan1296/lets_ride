@@ -219,6 +219,41 @@
           }
         }
       }
+    },
+    "GetRideDetails": {
+      "description": "success_response",
+      "schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from_place": {
+            "type": "string"
+          },
+          "to_place": {
+            "type": "string"
+          },
+          "date_and_time": {
+            "type": "string"
+          },
+          "asset_quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "EXPIRED"
+              ]
+         },
+         "no_of_seats": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+      }
+      }
     }
   },
   "paths": {
@@ -330,6 +365,24 @@
           }
         }
       }
+    },
+    "/user/share/ride/info/v1/": {
+      "get": {
+        "security": [{
+          "oauth": [
+            "superuser"
+          ]
+        }],
+        "operationId": "get_share_ride_details",
+        "summary": "Get Share Ride Details",
+        "description": "share ride details",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetRideDetails"
+            }
+            }
+          }
+        }
     }
-  }
 }

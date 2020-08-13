@@ -1,48 +1,43 @@
+from datetime import timedelta
 from django_swagger_utils.drf_server.utils.decorator.interface_decorator \
     import validate_decorator
 from .validator_class import ValidatorClass
+from lets_ride.interactors.storages.dtos.dtos import ShareTravelInfoDTO
+from lets_ride.interactors.share_travel_info import ShareTravelInfoInteractor
+from lets_ride.storages.storage_implementation import StorageImplementation
+from lets_ride.presenters.presenter_implementation import PresenterImplementation
 
 
 @validate_decorator(validator_class=ValidatorClass)
 def api_wrapper(*args, **kwargs):
-    # ---------MOCK IMPLEMENTATION---------
+    user = kwargs['user']
+    request_data = dict(kwargs['request_data'])
+    user_id = user.id
 
-    try:
-        from lets_ride.views.share_travel_info.request_response_mocks \
-            import REQUEST_BODY_JSON
-        body = REQUEST_BODY_JSON
-    except ImportError:
-        body = {}
+    if request_data['is_flexible']:
+        request_data['flexible_from_time'] += timedelta(hours=5, minutes=30)
+        request_data['flexible_to_time'] += timedelta(hours=5, minutes=30)
+    else:
+        request_data['travel_date_time'] += timedelta(hours=5, minutes=30)
 
-    test_case = {
-        "path_params": {},
-        "query_params": {},
-        "header_params": {},
-        "body": body,
-        "securities": [{'oauth': ['superuser']}]
-    }
+    share_travel_dto = ShareTravelInfoDTO(
+        from_place=request_data['from_place'],
+        to_place=request_data['to_place'],
+        travel_date_time=request_data['travel_date_time'],
+        is_flexible=request_data['is_flexible'],
+        flexible_from_time=request_data['flexible_from_time'],
+        flexible_to_time=request_data['flexible_to_time'],
+        travel_medium=request_data['travel_medium'],
+        assets_quantity=request_data['assets_quantity'],
+        user_id=user_id
+    )
 
-    from django_swagger_utils.drf_server.utils.server_gen.mock_response \
-        import mock_response
-    try:
-        response = ''
-        status_code = 200
-        if '200' in ['200']:
-            from lets_ride.views.share_travel_info.request_response_mocks \
-                import RESPONSE_200_JSON
-            response = RESPONSE_200_JSON
-            status_code = 200
-        elif '201' in ['200']:
-            from lets_ride.views.share_travel_info.request_response_mocks \
-                import RESPONSE_201_JSON
-            response = RESPONSE_201_JSON
-            status_code = 201
-    except ImportError:
-        response = ''
-        status_code = 200
-    response_tuple = mock_response(
-        app_name="lets_ride", test_case=test_case,
-        operation_name="share_travel_info",
-        kwargs=kwargs, default_response_body=response,
-        group_name="", status_code=status_code)
-    return response_tuple
+    storage = StorageImplementation()
+    presenter = PresenterImplementation()
+    interactor = ShareTravelInfoInteractor(
+        storage=storage,
+        presenter=presenter
+    )
+
+    response = interactor.post_share_travel_info(share_travel_dto=share_travel_dto)
+    return response

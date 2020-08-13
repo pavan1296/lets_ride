@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from factory import Factory
 import factory
 import datetime
-from lets_ride.constants.enums import AssetSensitivity
+from lets_ride.constants.enums import AssetSensitivity, TravelMedium
 
 
 @dataclass
@@ -56,6 +56,7 @@ class ShareTravelInfoDTO:
     travel_date_time: str
     travel_medium: str
     assets_quantity: int
+    user_id: int
 
 class RideRequestDTOFactory(Factory):
     class Meta:
@@ -103,3 +104,16 @@ class RideShareDTOFactory(Factory):
     assets_quantity = factory.Sequence(lambda n: n + 1)
     user_id = 2
 
+class ShareTravelInfoDTOFactory(Factory):
+    class Meta:
+        model = ShareTravelInfoDTO
+
+    from_place = factory.Iterator(['Hyderabad', 'Delhi', 'Mumbai'])
+    to_place = factory.Iterator(['Chennai', 'Pune'])
+    is_flexible = True
+    flexible_from_time = factory.LazyFunction(datetime.datetime.now)
+    flexible_to_time = factory.LazyFunction(datetime.datetime.now)
+    travel_date_time = factory.LazyFunction(datetime.datetime.now)
+    travel_medium = factory.LazyFunction(TravelMedium.get_list_of_values)
+    assets_quantity = factory.Sequence(lambda n: n + 1)
+    user_id = 2

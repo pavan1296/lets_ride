@@ -19,7 +19,7 @@ def test_user_profile_with_valid_data_return_response():
     )
     user_profile_factory = UserProfileFactory()
     storage.check_user_id_exists_in_user_model.return_value = 1
-    storage.get_user_profile_dto.return_value = user_profile_factory
+    storage.get_user_profile_dto.return_value = [user_profile_factory]
     #Act
     interactor.get_user_profile(user_ids=user_ids)
     #Assert

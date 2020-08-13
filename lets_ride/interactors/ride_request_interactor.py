@@ -15,7 +15,7 @@ class RideRequestInteractor(RideORAssetRequestValidationMixin):
     def post_ride_details_from_user(self, ride_request_dto: RideRequestDTO):
 
         # TODO: check_from_and_to_place_are_not_empty
-        # TODO: check_is_flexible_true_then_from_shoul_dnot_greater_than_to
+        # TODO: check_is_flexible_true_then_from_should_not_greater_than_to
         # TODO: check_is_flexible_true_then_to_should_not_greater_than_current_time
         # TODO: check_no_of_seats_should_not_less_than_or_equal_to_zero
         # TODO: check_luggage_quantity_not_less_than_equal_to_zero

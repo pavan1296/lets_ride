@@ -21,7 +21,7 @@ class UserProfileInteractor:
     def _check_user_id_exists_in_user(self, user_ids: List[int]):
         self._check_list_of_user_ids_present_in_user(user_ids=user_ids)
         list_of_user_dtos = self.storage.get_user_profile_dto(user_ids=user_ids)
-        return list_of_user_dtos
+        return list_of_user_dtos[0]
 
     def _check_list_of_user_ids_present_in_user(self, user_ids: List[int]):
         len_of_objs = self.storage.check_user_id_exists_in_user_model(user_ids=user_ids)
@@ -30,6 +30,6 @@ class UserProfileInteractor:
             raise UserDoesNotExist
 
     def get_user_dtos(self, user_ids: List[int]):
-        self._check_list_of_user_ids_present_in_user(user_ids=user_ids)
+        self._check_user_id_exists_in_user(user_ids=user_ids)
         list_of_user_dtos = self.storage.get_user_profile_dto(user_ids=user_ids)
         return list_of_user_dtos

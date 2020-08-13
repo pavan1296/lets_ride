@@ -12,18 +12,18 @@ def user_access_token_response_fixture():
 
 @pytest.fixture()
 def user_profile_fixture():
-    expected_user_profile = [{
+    expected_user_profile = {
         "name": "Pavan",
         "gender": "MALE",
         "email": "ibcommon@ibhubs.in",
         "phone_number": "7799888142",
         "image_url": "www.ibhubs.co"
-    }]
+    }
     return expected_user_profile
 
 @pytest.fixture()
 def user_profile_presenter_dto():
-    return [UserProfileFactory()]
+    return UserProfileFactory()
 
 @pytest.fixture()
 def invalid_phone_number_fixture():

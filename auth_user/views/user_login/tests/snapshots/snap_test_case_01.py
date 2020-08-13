@@ -20,19 +20,19 @@ snapshots['TestCase01UserLoginAPITestCase::test_case header_params'] = {
         'en'
     ],
     'content-length': [
-        '54',
+        '51',
         'Content-Length'
     ],
     'content-type': [
         'Content-Type',
-        'text/html; charset=utf-8'
+        'application/json'
     ],
     'vary': [
-        'Accept-Language, Origin',
+        'Accept-Language, Origin, Cookie',
         'Vary'
     ],
     'x-frame-options': [
-        'DENY',
+        'SAMEORIGIN',
         'X-Frame-Options'
     ]
 }

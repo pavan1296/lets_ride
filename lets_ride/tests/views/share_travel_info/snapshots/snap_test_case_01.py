@@ -7,6 +7,6 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase01ShareTravelInfoAPITestCase.test_case status_code'] = '200'
+snapshots['TestCase01ShareTravelInfoAPITestCase.test_case status_code'] = '201'
 
 snapshots['TestCase01ShareTravelInfoAPITestCase.test_case body'] = b''

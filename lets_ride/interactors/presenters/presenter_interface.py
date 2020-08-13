@@ -56,3 +56,11 @@ class PresenterInterface(ABC):
     @abstractmethod
     def share_travel_info_response(self):
         pass
+
+    @abstractmethod
+    def invalid_user_given_returns_error_response(self):
+        pass
+
+    @abstractmethod
+    def share_ride_details_response_details(self, share_ride_details):
+        pass

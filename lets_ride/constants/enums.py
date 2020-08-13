@@ -14,6 +14,10 @@ class AssetSensitivity(BaseEnumClass, Enum):
     sensitive = "SENSITIVE"
     normal = "NORMAL"
 
+class ShareTravelStatus(BaseEnumClass, Enum):
+    active = "ACTIVE"
+    expired = "EXPIRED"
+
 
 class TravelMedium(BaseEnumClass, Enum):
     bus = "BUS"

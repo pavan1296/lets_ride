@@ -51,3 +51,14 @@ snapshots['TestCase01UserProfileAPITestCase::test_case user_profile'] = [
         'phone_number': ''
     }
 ]
+
+snapshots['TestCase01UserProfileAPITestCase.test_case status_code'] = '500'
+
+snapshots['TestCase01UserProfileAPITestCase.test_case body'] = {
+    'gender': [
+        '"" is not a valid choice.'
+    ],
+    'phone_number': [
+        'This field may not be blank.'
+    ]
+}

@@ -34,16 +34,13 @@ class PresenterImplementation(PresenterInterface):
         response = json.dumps(invalid_user)
         return HttpResponse(response, status=400)
 
-    def user_profile_dto_response(self, user_profile_dto: List[UserProfileDTO]):
-        list_of_user_profiles = []
-        for user in user_profile_dto:
-            user_profile = {
-                "name": user.username,
-                "gender": user.gender,
-                "email": user.email,
-                "phone_number": user.phone_number,
-                "image_url": user.image_url
-            }
-            list_of_user_profiles.append(user_profile)
-        response = json.dumps(list_of_user_profiles)
+    def user_profile_dto_response(self, user_profile_dto: UserProfileDTO):
+        user_profile = {
+                "name": user_profile_dto.username,
+                "gender": user_profile_dto.gender,
+                "email": user_profile_dto.email,
+                "phone_number": user_profile_dto.phone_number,
+                "image_url": user_profile_dto.image_url
+        }
+        response = json.dumps(user_profile)
         return HttpResponse(response)

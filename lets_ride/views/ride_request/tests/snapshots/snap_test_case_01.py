@@ -35,3 +35,7 @@ snapshots['TestCase01RideRequestAPITestCase::test_case header_params'] = {
 }
 
 snapshots['TestCase01RideRequestAPITestCase::test_case ride_request'] = 201
+
+snapshots['TestCase01RideRequestAPITestCase.test_case status_code'] = '201'
+
+snapshots['TestCase01RideRequestAPITestCase.test_case body'] = b''

@@ -13,6 +13,11 @@ class TestCase01ShareTravelInfoAPITestCase(TestUtils):
     URL_SUFFIX = URL_SUFFIX
     SECURITY = {'oauth': {'scopes': ['superuser']}}
 
+    @pytest.fixture()
+    def setup(self, api_user):
+        from lets_ride.interactors.storages.dtos.dtos import ShareTravelInfoDTOFactory
+        ShareTravelInfoDTOFactory.reset_sequence()
+
     @pytest.mark.django_db
     def test_case(self, snapshot):
         body = {

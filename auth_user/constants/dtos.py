@@ -1,12 +1,5 @@
 from dataclasses import dataclass
 
-import factory
-from factory import Factory
-import datetime
-import string
-import factory.fuzzy
-from auth_user.constants.enum import GenderInformation
-
 
 @dataclass
 class UserLoginAccessTokenDTO:
